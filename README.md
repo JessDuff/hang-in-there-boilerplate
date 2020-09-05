@@ -76,4 +76,4 @@ You are welcome to add your own extensions. Be sure they are thoughtful in terms
 - Allow users to drag and drop saved posters into whatever order they want them to appear
 
 
-Project spec & rubric can be found [here](https://frontend.turing.io/projects/module-1/hang-in-there.html)
+Project spec & rubric can be found [here](http://academy.solidkraft.com/projects/module-1/hang-in-there.html)
