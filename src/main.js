@@ -7,7 +7,13 @@ var makePosterButton = document.querySelector('.show-form');
 var posterForm = document.querySelector('.poster-form');
 var mainPoster = document.querySelector('.main-poster');
 var savedPostersButton = document.querySelector('.show-saved');
-var savedPosters = document.querySelector('.saved-posters');
+var savedPoster = document.querySelector('.saved-posters');
+var nevermindButton = document.querySelector('.show-main');
+var backToMainButton = document.querySelector('.back-to-main');
+var imageInput = document.querySelector('#poster-image-url');
+var titleInput = document.querySelector('#poster-title');
+var quoteInput = document.querySelector('#poster-quote');
+var showPosterButton = document.querySelector('.make-poster');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -116,6 +122,13 @@ randomButton.addEventListener('click', addTitle);
 randomButton.addEventListener('click', addQuote);
 makePosterButton.addEventListener('click', showForm);
 savedPostersButton.addEventListener('click', showSavedPosters);
+nevermindButton.addEventListener('click', nevermind);
+backToMainButton.addEventListener('click', backToMain);
+showPosterButton.addEventListener('click', function(){
+  event.preventDefault();
+  showMyPoster();
+});
+//showPosterButton.addEventListener('click', showMyPoster);
 
 
 // functions and event handlers go here 👇
@@ -136,8 +149,25 @@ function showForm() {
   mainPoster.classList.add("hidden");
 }
 function showSavedPosters() {
-  savedPosters.classList.remove("hidden");
+  savedPoster.classList.remove("hidden");
   mainPoster.classList.add("hidden");
+}
+function nevermind() {
+  mainPoster.classList.remove("hidden");
+  posterForm.classList.add("hidden");
+}
+function backToMain() {
+  mainPoster.classList.remove("hidden");
+  savedPoster.classList.add("hidden");
+}
+function showMyPoster() {
+  images.push(imageInput.value);
+  titles.push(titleInput.value);
+  quotes.push(quoteInput.value);
+  posterImage.src = imageInput.value;
+  posterTitle.innerHTML = titleInput.value;
+  posterQuote.innerHTML = quoteInput.value;
+  nevermind();
 }
 
 addImage();
