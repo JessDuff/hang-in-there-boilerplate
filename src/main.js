@@ -181,7 +181,7 @@ function savePoster() {
   //   savedPostersGrid.insertAdjacentHTML("beforeend", x);
   // }
   // else {
-  //   var h = savedPosters.indexOf(poster);
+  //   var h = savedPosters.imageURL.indexOf(poster);
   //     if (h == -1) {
   //       savedPosters.push(poster);
   //       var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
