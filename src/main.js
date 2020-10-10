@@ -14,6 +14,8 @@ var imageInput = document.querySelector('#poster-image-url');
 var titleInput = document.querySelector('#poster-title');
 var quoteInput = document.querySelector('#poster-quote');
 var showPosterButton = document.querySelector('.make-poster');
+var savePosterButton = document.querySelector('.save-poster');
+var savedPostersGrid = document.querySelector('.saved-posters-grid');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -128,7 +130,7 @@ showPosterButton.addEventListener('click', function(){
   event.preventDefault();
   showMyPoster();
 });
-//showPosterButton.addEventListener('click', showMyPoster);
+savePosterButton.addEventListener('click', savePoster);
 
 
 // functions and event handlers go here 👇
@@ -170,9 +172,59 @@ function showMyPoster() {
   nevermind();
 }
 
+
+function savePoster() {
+  var poster = new Poster(posterImage.src, posterTitle.innerHTML, posterQuote.innerHTML);
+  // if (savedPosters.length == 0) {
+  //   savedPosters.push(poster);
+  //   var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
+  //   savedPostersGrid.insertAdjacentHTML("beforeend", x);
+  // }
+  // else {
+  //   var h = savedPosters.indexOf(poster);
+  //     if (h == -1) {
+  //       savedPosters.push(poster);
+  //       var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
+  //       savedPostersGrid.insertAdjacentHTML("beforeend", x);
+  //     }
+  // }
+
+  if (savedPosters.length == 0) {
+    savedPosters.push(poster);
+    var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
+    savedPostersGrid.insertAdjacentHTML("beforeend", x);
+  }
+  else {
+
+  savedPosters.forEach(p => {
+    if (p.imageURL != posterImage.src && p.title != posterTitle.innerHTML && p.quote != posterQuote.innerHTML) {
+      savedPosters.push(poster);
+
+      var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
+      savedPostersGrid.insertAdjacentHTML("beforeend", x);
+    }
+
+  });
+}
+
+
+
+
+    // for (var i = 0; i < savedPosters.length; i++) {
+    //   if (savedPosters[i].imageURL != posterImage.src && savedPosters[i].title != posterTitle.innerHTML && savedPosters[i].quote != posterQuote.innerHTML) {
+    //     savedPosters.push(poster);
+    //
+    //     var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
+    //     savedPostersGrid.insertAdjacentHTML("beforeend", x);
+    //   }
+    // }
+
+}
+
 addImage();
 addTitle();
 addQuote();
+
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
