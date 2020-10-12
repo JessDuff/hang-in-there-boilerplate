@@ -132,7 +132,6 @@ showPosterButton.addEventListener('click', function(){
 });
 savePosterButton.addEventListener('click', savePoster);
 
-
 // functions and event handlers go here 👇
 function addImage() {
   var randomIndex = getRandomIndex(images);
@@ -171,60 +170,52 @@ function showMyPoster() {
   posterQuote.innerHTML = quoteInput.value;
   nevermind();
 }
-
-
 function savePoster() {
-  var poster = new Poster(posterImage.src, posterTitle.innerHTML, posterQuote.innerHTML);
-  // if (savedPosters.length == 0) {
-  //   savedPosters.push(poster);
-  //   var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
-  //   savedPostersGrid.insertAdjacentHTML("beforeend", x);
-  // }
-  // else {
-  //   var h = savedPosters.imageURL.indexOf(poster);
-  //     if (h == -1) {
-  //       savedPosters.push(poster);
-  //       var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
-  //       savedPostersGrid.insertAdjacentHTML("beforeend", x);
-  //     }
-  // }
+  var allPosters = [];
+   var poster = new Poster(posterImage.src, posterTitle.innerHTML, posterQuote.innerHTML);
+   if (savedPosters.length == 0) {
+     savedPosters.push(poster);
+     // for (var i = 0; i < savedPosters.length; i++) {
+     //   var x = `<div class="mini-poster"><img src="` + savedPosters[i].imageURL + `" alt="nothin' to see here"><h2>` + savedPosters[i].title + `</h2><h4>` + savedPosters[i].quote + `</h4></div>`;
+     //   allPosters.push(x);
+     // }
+     // savedPostersGrid.innerHTML = allPosters.join('');
+   }
+   else {
+     savedPosters.forEach(a => {
+       if (poster.imageURL == a.imageURL) {
+         alert('que te pasa oy!');
+         savedPosters.pop();
+       }
+       else {
+         savedPosters.push(poster);
 
-  if (savedPosters.length == 0) {
-    savedPosters.push(poster);
-    var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
-    savedPostersGrid.insertAdjacentHTML("beforeend", x);
-  }
-  else {
-
-  savedPosters.forEach(p => {
-    if (p.imageURL != posterImage.src && p.title != posterTitle.innerHTML && p.quote != posterQuote.innerHTML) {
-      savedPosters.push(poster);
-
-      var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
-      savedPostersGrid.insertAdjacentHTML("beforeend", x);
-    }
-
-  });
-}
+       }
+     });
+   }
+   for (var i = 0; i < savedPosters.length; i++) {
+     var x = `<div class="mini-poster"><img src="` + savedPosters[i].imageURL + `" alt="nothin' to see here"><h2>` + savedPosters[i].title + `</h2><h4>` + savedPosters[i].quote + `</h4></div>`;
+     allPosters.push(x);
+   }
+   savedPostersGrid.innerHTML = allPosters.join('');
 
 
 
-
-    // for (var i = 0; i < savedPosters.length; i++) {
-    //   if (savedPosters[i].imageURL != posterImage.src && savedPosters[i].title != posterTitle.innerHTML && savedPosters[i].quote != posterQuote.innerHTML) {
-    //     savedPosters.push(poster);
-    //
-    //     var x = `<div class="mini-poster"><img src="` + poster.imageURL + `" alt="nothin' to see here"><h2>` + poster.title + `</h2><h4>` + poster.quote + `</h4></div>`;
-    //     savedPostersGrid.insertAdjacentHTML("beforeend", x);
-    //   }
-    // }
-
-}
+   var miniPosters = document.querySelectorAll('.mini-poster');
+   for (var item of miniPosters) {
+     var cont = 0;
+     item.addEventListener('dblclick', function() {
+       cont ++;
+       this.remove();
+       allPosters.splice(cont, 1);
+       savedPosters.splice(cont, 1);
+     })
+   }
+ }
 
 addImage();
 addTitle();
 addQuote();
-
 // (we've provided one for you to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
